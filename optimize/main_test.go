@@ -37,3 +37,17 @@ func BenchmarkNewProgramOptimizeFalse(b *testing.B) {
 		prog.Eval(inputs)
 	}
 }
+
+func BenchmarkRawCode(b *testing.B) {
+	u := User{
+		FirstName: "John",
+		LastName:  "Doe",
+		Age:       30,
+		Email:     "john@example.com",
+		Address:   "123 Main St",
+		Tel:       "1234567890",
+	}
+	for i := 0; i < b.N; i++ {
+		RawCode(u)
+	}
+}

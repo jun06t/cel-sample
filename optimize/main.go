@@ -72,3 +72,23 @@ func main() {
 	}
 	fmt.Println(out)
 }
+
+type User struct {
+	FirstName string
+	LastName  string
+	Age       int
+	Email     string
+	Address   string
+	Tel       string
+}
+
+func RawCode(u User) bool {
+	if len(u.FirstName) != 0 && len(u.LastName) != 0 &&
+		len(u.Email) != 0 && len(u.Address) != 0 &&
+		len(u.Tel) != 0 && u.Age > 0 && u.Age < 100 &&
+		len(u.FirstName) < 50 && len(u.LastName) < 50 &&
+		len(u.Email) < 50 && len(u.Tel) < 11 {
+		return true
+	}
+	return false
+}
