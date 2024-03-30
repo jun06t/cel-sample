@@ -1,0 +1,2 @@
+size(firstname) != 0 && size(lastname) != 0 && size(email) != 0 && size(tel) != 0
+&& size(firstname) <= 50 && size(lastname) <= 50 && size(email) <= 50 && size(tel) <= 11
