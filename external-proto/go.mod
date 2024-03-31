@@ -3,6 +3,7 @@ module github.com/jun06t/cel-sample/external-proto
 go 1.22.1
 
 require (
+	github.com/golang/protobuf v1.5.3
 	github.com/google/cel-go v0.20.1
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240325203815-454cdb8f5daa
 	google.golang.org/protobuf v1.33.0
