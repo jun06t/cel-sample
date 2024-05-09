@@ -1,1 +1,6 @@
-users.exists(user, user.id == "002")
+{
+  "id": id,
+  "profile": {
+    "grade": profile.grade
+  }
+}

@@ -12,9 +12,9 @@ import (
 func main() {
 	// CEL環境の設定
 	env, err := cel.NewEnv(
-		// 'num' という名前の整数型の変数を宣言
-		cel.Variable("num", cel.IntType),
-		cel.Variable("users", cel.ListType(cel.MapType(cel.StringType, cel.AnyType))),
+		cel.Variable("id", cel.StringType),
+		cel.Variable("profile", cel.MapType(cel.StringType, cel.AnyType)),
+		cel.Variable("createdAt", cel.IntType),
 	)
 	if err != nil {
 		log.Fatalf("Failed to create CEL environment: %v", err)
@@ -41,15 +41,14 @@ func main() {
 	}
 
 	// 評価する入力値
-	req := Request{
-		Num: 10,
-		Users: []User{
-			{ID: "001", Name: "Alice"},
-			{ID: "002", Name: "Bob"},
-			{ID: "003", Name: "Charlie"},
+	data := `{
+		"id": "001", "name": "Alice",
+		"profile": {
+			"grade": "A",
+			"favorites": ["tennis", "soccer"]
 		},
-	}
-	data, _ := json.Marshal(req)
+		"createdAt": 1234567890
+	}`
 	var inputs map[string]interface{}
 	if err := json.Unmarshal([]byte(data), &inputs); err != nil {
 		log.Fatalf("JSON Unmarshal error: %v\n", err)
@@ -63,14 +62,4 @@ func main() {
 
 	// 結果の出力
 	fmt.Printf("found?", result.Value())
-}
-
-type Request struct {
-	Num   int    `json:"num"`
-	Users []User `json:"users"`
-}
-
-type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
 }
