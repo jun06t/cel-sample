@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -13,6 +14,7 @@ func main() {
 	env, err := cel.NewEnv(
 		// 'num' という名前の整数型の変数を宣言
 		cel.Variable("num", cel.IntType),
+		cel.Variable("users", cel.ListType(cel.MapType(cel.StringType, cel.AnyType))),
 	)
 	if err != nil {
 		log.Fatalf("Failed to create CEL environment: %v", err)
@@ -39,8 +41,18 @@ func main() {
 	}
 
 	// 評価する入力値
-	inputs := map[string]interface{}{
-		"num": 10, // この値を変更して異なる入力で試すことができます
+	req := Request{
+		Num: 10,
+		Users: []User{
+			{ID: "001", Name: "Alice"},
+			{ID: "002", Name: "Bob"},
+			{ID: "003", Name: "Charlie"},
+		},
+	}
+	data, _ := json.Marshal(req)
+	var inputs map[string]interface{}
+	if err := json.Unmarshal([]byte(data), &inputs); err != nil {
+		log.Fatalf("JSON Unmarshal error: %v\n", err)
 	}
 
 	// プログラムの評価
@@ -50,5 +62,15 @@ func main() {
 	}
 
 	// 結果の出力
-	fmt.Printf("Is %v an even number? %v\n", inputs["num"], result.Value().(bool))
+	fmt.Printf("found?", result.Value())
+}
+
+type Request struct {
+	Num   int    `json:"num"`
+	Users []User `json:"users"`
+}
+
+type User struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
