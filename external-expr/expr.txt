@@ -1,6 +1,1 @@
-{
-  "id": id,
-  "profile": {
-    "grade": profile.grade
-  }
-}
+users.exists(user, user.id == "002")
