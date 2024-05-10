@@ -1,0 +1,6 @@
+{
+  "id": id,
+  "profile": {
+    "grade": profile.grade
+  }
+}
