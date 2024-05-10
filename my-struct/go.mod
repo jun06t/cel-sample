@@ -1,4 +1,4 @@
-module github.com/jun06t/cel-sample/filter
+module github.com/jun06t/cel-sample/my-struct
 
 go 1.22.2
 
