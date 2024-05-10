@@ -43,13 +43,6 @@ func main() {
 	// 評価する入力値
 	req := Request{
 		Num: 10,
-		/*
-			Users: []User{
-				{ID: "001", Name: "Alice"},
-				{ID: "002", Name: "Bob"},
-				{ID: "003", Name: "Charlie"},
-			},
-		*/
 	}
 	data, _ := json.Marshal(req)
 	fmt.Println(string(data))
